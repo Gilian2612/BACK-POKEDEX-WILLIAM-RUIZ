@@ -6,9 +6,6 @@ Desarrollo y Operaciones de Software (DOSW)
 ---
  
 | **DOSW** Desarrollo y Operaciones de Software | **ANÁLISIS DE REQUERIMIENTOS** | **Fecha:** | 01/07/2026 |
-|---|---|---|---|
-| | | **Página:** | 1 de 1 |
- 
 ---
  
 ## FUNCIONALIDAD
@@ -886,7 +883,7 @@ Desarrollo y Operaciones de Software (DOSW)
 | E1 | SISTEMA | Si no hay publicaciones disponibles, muestra mensaje indicando que el mercado está vacío | N/H |
 | E2 | SISTEMA | Si hay error de conexión, muestra mensaje de error con opción de reintentar | N/H |
  
-| **Notas y comentarios:** | El usuario no debe ver sus propias publicaciones en el listado del mercado. |
+| **Notas y comentarios:** | N/H |
 |---|---|
  
 ### ANEXOS
@@ -959,7 +956,6 @@ Desarrollo y Operaciones de Software (DOSW)
 |---|---|
 | 1 | Un usuario no puede enviarse solicitudes de intercambio a sí mismo. |
 | 2 | El Pokémon ofrecido debe pertenecer a la colección de capturados del solicitante. |
-| 3 | Una publicación solo puede tener una solicitud de intercambio activa a la vez. |
  
 ---
  
@@ -1020,9 +1016,7 @@ Desarrollo y Operaciones de Software (DOSW)
 | **No.** | **Descripción** |
 |---|---|
 | 1 | Al aceptar el intercambio, los Pokémon se transfieren simultáneamente en ambas colecciones. |
-| 2 | Al rechazar, la publicación vuelve al estado activo en el mercado. |
-| 3 | Una solicitud rechazada no puede volver a enviarse por el mismo usuario sobre la misma publicación. |
- 
+
 ---
  
 ## ABREVIATURAS
