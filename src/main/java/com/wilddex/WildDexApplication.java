@@ -2,11 +2,13 @@ package com.wilddex;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
-public class WildDexApplication {
+@EnableCaching
+public class WilddexApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WildDexApplication.class, args);
+        SpringApplication.run(WilddexApplication.class, args);
     }
 }
