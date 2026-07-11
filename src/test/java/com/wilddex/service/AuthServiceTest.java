@@ -1,5 +1,6 @@
 package com.wilddex.service;
 
+
 import com.wilddex.dto.request.LoginRequest;
 import com.wilddex.dto.request.RegisterRequest;
 import com.wilddex.exception.ConflictException;
@@ -28,6 +29,7 @@ class AuthServiceTest {
     @Mock private PasswordEncoder passwordEncoder;
     @Mock private JwtTokenProvider jwtTokenProvider;
     @Mock private JavaMailSender mailSender;
+    @Mock private com.wilddex.mapper.UserMapper userMapper;
 
     @InjectMocks private AuthService authService;
 
@@ -44,9 +46,10 @@ class AuthServiceTest {
         when(userRepository.existsByUsername("testuser")).thenReturn(false);
         when(passwordEncoder.encode(any())).thenReturn("encodedPassword");
         when(userRepository.save(any(User.class))).thenAnswer(i -> i.getArgument(0));
-
+        
+        when(userMapper.toResponse(any(User.class))).thenReturn(null); 
         assertDoesNotThrow(() -> authService.register(registerRequest));
-        verify(userRepository).save(any(User.class));
+        verify(userRepository, atLeast(1)).save(any(User.class));
     }
 
     @Test

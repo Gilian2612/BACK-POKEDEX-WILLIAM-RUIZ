@@ -26,6 +26,7 @@ class CollectionServiceTest {
     @Mock private CapturedPokemonRepository capturedPokemonRepository;
     @Mock private FavoritePokemonRepository favoritePokemonRepository;
     @Mock private UserRepository userRepository;
+    @Mock private com.wilddex.mapper.CollectionMapper collectionMapper;
 
     @InjectMocks private CollectionService collectionService;
 
@@ -41,6 +42,7 @@ class CollectionServiceTest {
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(capturedPokemonRepository.existsByUserIdAndPokemonId(1L, 25)).thenReturn(false);
         when(capturedPokemonRepository.save(any())).thenAnswer(i -> i.getArgument(0));
+        when(collectionMapper.toResponse(any(CapturedPokemon.class))).thenReturn(null);
 
         assertDoesNotThrow(() -> collectionService.capturePokemon(1L, 25, "pikachu"));
         verify(capturedPokemonRepository).save(any(CapturedPokemon.class));
@@ -48,8 +50,8 @@ class CollectionServiceTest {
 
     @Test
     void capturePokemon_shouldThrow_whenAlreadyCaptured() {
-        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
-        when(capturedPokemonRepository.existsByUserIdAndPokemonId(1L, 25)).thenReturn(true);
+        lenient().when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        when(capturedPokemonRepository.existsByUserIdAndPokemonId(1L, 25)).thenReturn(true); 
 
         assertThrows(ConflictException.class,
                 () -> collectionService.capturePokemon(1L, 25, "pikachu"));
