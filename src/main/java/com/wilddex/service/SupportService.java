@@ -1,5 +1,4 @@
 package com.wilddex.service;
-
 import com.wilddex.dto.support.ChatMessage;
 import com.wilddex.dto.support.ChatRequest;
 import com.wilddex.dto.support.ChatResponse;
@@ -103,13 +102,8 @@ public class SupportService {
         }
         messages.add(Map.of("role", "user", "content", request.message()));
 
-        Map<String, Object> body = Map.of(
-                "model", model,
-                "max_tokens", 300,
-                "system", SYSTEM_PROMPT,
-                "messages", messages
-        );
-
+        Map<String, Object> body = Map.of("model", model,"max_tokens", 300, "system", SYSTEM_PROMPT, "messages", messages);
+        
         Map response = anthropicClient.post()
                 .uri("/v1/messages")
                 .contentType(MediaType.APPLICATION_JSON)

@@ -60,6 +60,10 @@ public class User {
     @Builder.Default
     private boolean enabled = true;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private Integer coins = 1000;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<CapturedPokemon> capturedPokemon = new ArrayList<>();
