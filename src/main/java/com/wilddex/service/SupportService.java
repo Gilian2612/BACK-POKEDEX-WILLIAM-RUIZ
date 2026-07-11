@@ -122,6 +122,7 @@ public class SupportService {
             log.error("Respuesta vacía de Claude API");
             throw new RuntimeException("Error al obtener respuesta del asistente");
         }
+        @SuppressWarnings("unchecked")
 
         List<Map<String, Object>> content = (List<Map<String, Object>>) response.get("content");
         String reply = (String) content.get(0).get("text");
