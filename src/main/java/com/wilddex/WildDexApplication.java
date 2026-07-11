@@ -6,9 +6,9 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @EnableCaching
-public class WilddexApplication {
+public class WildDexApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WilddexApplication.class, args);
+        SpringApplication.run(WildDexApplication.class, args);
     }
 }
