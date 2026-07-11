@@ -1,0 +1,86 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: wilddex-backend
+
+  # ── PostgreSQL ──
+  datasource:
+    url: jdbc:postgresql://localhost:5432/wilddex_db
+    username: wilddex_user
+    password: wilddex_pass
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  # ── OAuth2 (Google / Gmail) ──
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:your-google-client-id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:your-google-client-secret}
+            scope: openid, profile, email
+            redirect-uri: "{baseUrl}/api/v1/auth/oauth2/callback/{registrationId}"
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://openidconnect.googleapis.com/v1/userinfo
+            user-name-attribute: sub
+
+  # ── Mail (OTP) ──
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  # ── Cache ──
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=500,expireAfterWrite=30m
+
+# ── JWT ──
+app:
+  jwt:
+    secret: ${JWT_SECRET:WildDexSuperSecretKeyForJWTTokenGeneration2026MustBeAtLeast256BitsLong!!}
+    expiration-ms: 86400000        # 24 horas
+    refresh-expiration-ms: 604800000  # 7 días
+
+  # ── PokéAPI ──
+  pokeapi:
+    base-url: https://pokeapi.co/api/v2
+
+  # ── OTP ──
+  otp:
+    expiration-minutes: 30
+    length: 6
+
+  # ── Anthropic (Soporte IA) ──
+  anthropic:
+    api-key: ${ANTHROPIC_API_KEY:your-anthropic-api-key}
+    model: ${ANTHROPIC_MODEL:claude-haiku-4-5-20251001}
+
+  # ── CORS ──
+  cors:
+    allowed-origins: http://localhost:3000,http://localhost:5173
+    allowed-methods: GET,POST,PUT,DELETE,PATCH,OPTIONS
+    allowed-headers: "*"
+    allow-credentials: true
