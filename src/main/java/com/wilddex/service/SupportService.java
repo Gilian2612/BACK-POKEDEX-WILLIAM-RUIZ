@@ -84,10 +84,7 @@ public class SupportService {
             - No inventes funcionalidades que no existen.
             """;
 
-    public SupportService(
-            WebClient.Builder webClientBuilder,
-            @Value("${wilddex.anthropic.api-key}") String apiKey,
-            @Value("${wilddex.anthropic.model:claude-haiku-4-5-20251001}") String model) {
+    public SupportService( WebClient.Builder webClientBuilder, @Value("${app.anthropic.api-key}") String apiKey, @Value("${app.anthropic.model:claude-haiku-4-5-20251001}") String model) {
         this.model = model;
         this.anthropicClient = webClientBuilder
                 .baseUrl("https://api.anthropic.com")
