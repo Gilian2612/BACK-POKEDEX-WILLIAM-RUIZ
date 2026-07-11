@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+
+  # Única base de datos del proyecto — usuarios, colección, favoritos, mercado, intercambios.
+  # Los datos de Pokémon (stats, sprites, evoluciones) NO se persisten aquí:
+  # se consultan en vivo desde la PokéAPI según PKX-005 a PKX-009.
+  postgres:
+    image: postgres:15-alpine
+    container_name: wilddex-postgres
+    environment:
+      POSTGRES_DB: wilddex_db
+      POSTGRES_USER: wilddex_user
+      POSTGRES_PASSWORD: wilddex_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
